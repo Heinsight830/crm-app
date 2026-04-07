@@ -7,11 +7,15 @@ use App\Models\Payment;
 use App\Models\TrainingSession;
 use Filament\Pages\Page;
 
-class Dashboard extends Page
+class CrmDashboard extends Page
 {
+    protected static ?string $navigationLabel = 'Dashboard';
+
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-chart-bar';
 
     protected static ?string $title = 'Dashboard';
+
+    protected static ?int $navigationSort = 1;
 
     protected string $view = 'filament.pages.dashboard';
 
@@ -28,6 +32,11 @@ class Dashboard extends Page
     public $paymentAlerts = [];
     public $trainingAlerts = [];
     public $recentDeals = [];
+
+    public static function getSlug(): string
+    {
+        return 'crm-dashboard';
+    }
 
     public static function shouldRegisterNavigation(): bool
     {
