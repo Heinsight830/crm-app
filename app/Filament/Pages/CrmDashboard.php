@@ -51,21 +51,13 @@ class CrmDashboard extends Page
     public function mount(): void
     {
         $this->totalDeals = Deal::count();
-
         $this->totalRevenue = Payment::where('status', 'paid')->sum('amount');
-
         $this->renewalsDue = Deal::where('stage', 'renewal_due')->count();
-
         $this->paidPayments = Payment::where('status', 'paid')->count();
-
         $this->pendingPayments = Payment::where('status', 'pending')->count();
-
         $this->upcomingTraining = TrainingSession::where('status', 'scheduled')->count();
-
         $this->closedWonDeals = Deal::where('stage', 'closed_won')->count();
-
-        $this->pipelineValue = Deal::whereNotIn('stage', ['closed_lost'])
-            ->sum('value');
+        $this->pipelineValue = Deal::whereNotIn('stage', ['closed_lost'])->sum('value');
 
         $this->dealsByStage = Deal::selectRaw('stage, COUNT(*) as total')
             ->groupBy('stage')
