@@ -23,14 +23,14 @@ class PaymentResource extends Resource
     protected static ?string $recordTitleAttribute = 'reference';
 
     public static function shouldRegisterNavigation(): bool
-    {
-        return auth()->check() && auth()->user()->hasAnyRole(['admin', 'sales']);
-    }
+{
+    return auth()->check() && auth()->user()->hasAnyRole(['admin']);
+}
 
     public static function canAccess(): bool
-    {
-        return auth()->check() && auth()->user()->hasAnyRole(['admin', 'sales']);
-    }
+{
+    return auth()->check() && auth()->user()->hasAnyRole(['admin']);
+}
 
     public static function form(Schema $schema): Schema
     {
